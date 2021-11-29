@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">DigiAndroid</string>
+    <string name="home">Home</string>
+    <string name="category">Category</string>
+    <string name="setting">Setting</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="login">Login</string>
+    <string name="username">username</string>
+    <string name="password">password</string>
+    <string name="username_req">Username is required!</string>
+    <string name="password_req">Password is required</string>
+    <string name="fail_request">Fail Request</string>
+    <string name="data_req">Username or Password are wrong!</string>
+    <string name="success">Success</string>
+</resources>
