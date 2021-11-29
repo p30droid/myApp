@@ -8,6 +8,7 @@ import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import androidx.fragment.app.Fragment
+import com.androidlearn.digiandroid.config.ConfigApp
 import com.androidlearn.digiandroid.databinding.ActivityMainBinding
 import com.androidlearn.digiandroid.di.DaggerUserComponent
 import com.androidlearn.digiandroid.di.UserComponent
@@ -84,6 +85,12 @@ class MainActivity : AppCompatActivity() {
 
         compoent.provideUser().addUser("Reza Heyranina")
         compoent.provideUser().user
+
+        var app : ConfigApp = ConfigApp()
+        app.getContext()
+        app.getComponent()?.provideUser()?.addUser("")
+        ConfigApp().getContext()
+        ConfigApp().getComponent()?.provideUser()?.user
 
 
     }
