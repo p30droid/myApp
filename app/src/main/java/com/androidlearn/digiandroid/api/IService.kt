@@ -1,6 +1,7 @@
 package com.androidlearn.digiandroid.api
 
 import com.androidlearn.digiandroid.models.BaseModel
+import com.androidlearn.digiandroid.models.Category
 import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.http.Field
@@ -20,5 +21,9 @@ interface IService {
 
     @GET("home.php")
     fun home(): Call<BaseModel>
+
+
+    @GET("getCategories.php")
+    fun category(): Call<Category>
 
 }
