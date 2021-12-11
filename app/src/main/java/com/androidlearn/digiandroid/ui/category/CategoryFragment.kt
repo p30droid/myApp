@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.androidlearn.digiandroid.R
 import com.androidlearn.digiandroid.databinding.FragmentCategoryBinding
 import com.androidlearn.digiandroid.databinding.FragmentHomeBinding
@@ -46,6 +47,13 @@ class CategoryFragment : Fragment() {
                 Log.e("","")
                 if (t != null) {
                     Log.e("","${t.categories.size}")
+
+
+                    binding.recyclerCategory.adapter = CategoryAdapter(t.categories)
+
+                    binding.recyclerCategory.layoutManager = LinearLayoutManager(activity , LinearLayoutManager.VERTICAL , false)
+
+
                 };
             }
 

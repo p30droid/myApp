@@ -8,6 +8,7 @@ import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import androidx.fragment.app.Fragment
+import androidx.viewpager2.widget.ViewPager2
 import com.androidlearn.digiandroid.config.ConfigApp
 import com.androidlearn.digiandroid.databinding.ActivityMainBinding
 import com.androidlearn.digiandroid.di.DaggerUserComponent
@@ -91,6 +92,61 @@ class MainActivity : AppCompatActivity() {
         app.getComponent()?.provideUser()?.addUser("")
         ConfigApp().getContext()
         ConfigApp().getComponent()?.provideUser()?.user
+
+
+        binding.bottomMenu.setOnItemSelectedListener { it->
+
+
+            when(it.itemId){
+
+                R.id.item_home-> {
+                    binding.pager.currentItem = 0
+                    binding.bottomMenu.getMenu().findItem(R.id.item_home).setChecked(true)
+                }
+
+                R.id.item_category-> {
+                    binding.pager.currentItem = 1
+                    binding.bottomMenu.getMenu().findItem(R.id.item_category).setChecked(true)
+                }
+
+                R.id.item_setting-> {
+                    binding.pager.currentItem = 2
+                    binding.bottomMenu.getMenu().findItem(R.id.item_setting).setChecked(true)
+                }
+
+
+            }
+
+            true
+
+        }
+
+        binding.pager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
+
+            override fun onPageSelected(position: Int) {
+                super.onPageSelected(position)
+
+                when(position){
+
+                    0 ->{
+                        binding.pager.currentItem = 0
+                        binding.bottomMenu.getMenu().findItem(R.id.item_home).setChecked(true)
+                    }
+                    1 ->{
+                        binding.pager.currentItem = 1
+                        binding.bottomMenu.getMenu().findItem(R.id.item_category).setChecked(true)
+                    }
+                    2 ->{
+                        binding.pager.currentItem = 2
+                        binding.bottomMenu.getMenu().findItem(R.id.item_setting).setChecked(true)
+                    }
+
+
+                }
+
+            }
+
+        })
 
 
     }

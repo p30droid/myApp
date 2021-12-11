@@ -11,10 +11,26 @@
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/purple_500"
+        android:background="@color/app_color"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+
+            <com.androidlearn.digiandroid.customView.KasraTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/font_titles"
+                android:textColor="@color/white"
+                android:layout_centerInParent="true"
+                android:text="@string/app_title"
+                />
+
+        </RelativeLayout>
 
 
     </androidx.appcompat.widget.Toolbar>

@@ -1,5 +1,6 @@
 package com.androidlearn.digiandroid.ui.home
 
+import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -7,7 +8,15 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.androidlearn.digiandroid.databinding.FragmentHomeBinding
+import com.androidlearn.digiandroid.models.BaseModel
+import com.androidlearn.digiandroid.ui.home.adapter.NewsAdapter
+import com.androidlearn.digiandroid.ui.home.adapter.ProductAdapter
+import com.androidlearn.digiandroid.ui.home.viewmodel.HomeViewModel
 import com.google.android.gms.ads.AdListener
 import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.FullScreenContentCallback
@@ -25,15 +34,126 @@ class HomeFragment : Fragment() {
     private var mInterstitialAd: InterstitialAd? = null
     private lateinit var rewardedAd: RewardedAd
 
+    lateinit var viewModel: HomeViewModel
+    lateinit var owner: LifecycleOwner
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        owner = this
+    }
+
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
+        inflater: LayoutInflater,
+        container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
 
         binding = FragmentHomeBinding.inflate(layoutInflater)
+        viewModel = ViewModelProvider(this).get(HomeViewModel::class.java)
+
+       // adView()
+      //  adRequestIntertial()
+
+       // allAdsCode()
+
+        viewModel.getHomeData().observe(owner, Observer<BaseModel> {
 
 
+            binding.pagerNews.adapter = activity?.let { it1 -> NewsAdapter(it1, it.news) }
+
+            binding.recyclerMobiles.adapter = ProductAdapter(it.mobile)
+            binding.recyclerMobiles.layoutManager = LinearLayoutManager(activity , LinearLayoutManager.HORIZONTAL , false)
+
+
+            binding.recyclerMakeup.adapter = ProductAdapter(it.makeup)
+            binding.recyclerMakeup.layoutManager = LinearLayoutManager(activity , LinearLayoutManager.HORIZONTAL , false)
+
+            binding.recyclerDiscount.adapter = ProductAdapter(it.discount)
+            binding.recyclerDiscount.layoutManager = LinearLayoutManager(activity , LinearLayoutManager.HORIZONTAL , false)
+
+
+
+
+        })
+
+
+
+
+        return binding.root
+    }
+
+    private fun HomeFragment.allAdsCode() {
+        /*  mInterstitialAd?.fullScreenContentCallback = object: FullScreenContentCallback() {
+              override fun onAdDismissedFullScreenContent() {
+                  Log.d(TAG, 'Ad was dismissed.')
+              }
+
+              override fun onAdFailedToShowFullScreenContent(adError: AdError?) {
+                  Log.d(TAG, 'Ad failed to show.')
+              }
+
+              override fun onAdShowedFullScreenContent() {
+                  Log.d(TAG, 'Ad showed fullscreen content.')
+                  mInterstitialAd = null
+              }
+          }
+  */
+
+        // rewardedAd = RewardedAd()
+
+        val fullScreenContentCallback: FullScreenContentCallback =
+            object : FullScreenContentCallback() {
+                override fun onAdShowedFullScreenContent() {
+                    // Code to be invoked when the ad showed full screen content.
+                }
+
+                override fun onAdDismissedFullScreenContent() {
+                    //  rewardedAd = null
+                    // Code to be invoked when the ad dismissed full screen content.
+                }
+            }
+
+        RewardedAd.load(
+            activity,
+            "adUnitId",
+            AdRequest.Builder().build(),
+            object : RewardedAdLoadCallback() {
+                override fun onAdLoaded(ad: RewardedAd) {
+                    // findViewById(R.id.display_button).setVisibility(View.VISIBLE)
+                    rewardedAd = ad
+                    rewardedAd.setFullScreenContentCallback(fullScreenContentCallback)
+                }
+            })
+    }
+
+    private fun adRequestIntertial() {
+        var adRequest_intertial = AdRequest.Builder().build()
+
+        InterstitialAd.load(
+            activity,
+            "ca-app-pub-3940256099942544/1033173712",
+            adRequest_intertial,
+            object : InterstitialAdLoadCallback() {
+                override fun onAdFailedToLoad(adError: LoadAdError) {
+                    Log.d("InterstitialAd", adError?.message)
+                    mInterstitialAd = null
+                }
+
+                override fun onAdLoaded(interstitialAd: InterstitialAd) {
+                    Log.d("InterstitialAd", "Ad was loaded.")
+                    mInterstitialAd = interstitialAd
+
+                    if (mInterstitialAd != null) {
+                        mInterstitialAd?.show(activity)
+                    } else {
+                        Log.d("TAG", "The interstitial ad wasn't ready yet.")
+                    }
+                }
+            })
+    }
+
+    private fun adView() {
         val adRequest = AdRequest.Builder().build()
         binding.adView.loadAd(adRequest)
 
@@ -65,80 +185,6 @@ class HomeFragment : Fragment() {
                 Log.e("adListener", "onAdClosed");
             }
         }
-
-
-        var adRequest_intertial = AdRequest.Builder().build()
-
-        InterstitialAd.load(
-            activity,
-            "ca-app-pub-3940256099942544/1033173712",
-            adRequest_intertial,
-            object : InterstitialAdLoadCallback() {
-                override fun onAdFailedToLoad(adError: LoadAdError) {
-                    Log.d("InterstitialAd", adError?.message)
-                    mInterstitialAd = null
-                }
-
-                override fun onAdLoaded(interstitialAd: InterstitialAd) {
-                    Log.d("InterstitialAd", "Ad was loaded.")
-                    mInterstitialAd = interstitialAd
-
-                    if (mInterstitialAd != null) {
-                        mInterstitialAd?.show(activity)
-                    } else {
-                        Log.d("TAG", "The interstitial ad wasn't ready yet.")
-                    }
-                }
-            })
-
-        /*  mInterstitialAd?.fullScreenContentCallback = object: FullScreenContentCallback() {
-              override fun onAdDismissedFullScreenContent() {
-                  Log.d(TAG, 'Ad was dismissed.')
-              }
-
-              override fun onAdFailedToShowFullScreenContent(adError: AdError?) {
-                  Log.d(TAG, 'Ad failed to show.')
-              }
-
-              override fun onAdShowedFullScreenContent() {
-                  Log.d(TAG, 'Ad showed fullscreen content.')
-                  mInterstitialAd = null
-              }
-          }
-  */
-
-       // rewardedAd = RewardedAd()
-
-        val fullScreenContentCallback: FullScreenContentCallback =
-            object : FullScreenContentCallback() {
-                override fun onAdShowedFullScreenContent() {
-                    // Code to be invoked when the ad showed full screen content.
-                }
-
-                override fun onAdDismissedFullScreenContent() {
-                    //  rewardedAd = null
-                    // Code to be invoked when the ad dismissed full screen content.
-                }
-            }
-
-        RewardedAd.load(
-            activity,
-            "adUnitId",
-            AdRequest.Builder().build(),
-            object : RewardedAdLoadCallback() {
-                override fun onAdLoaded(ad: RewardedAd) {
-                    // findViewById(R.id.display_button).setVisibility(View.VISIBLE)
-                    rewardedAd = ad
-                    rewardedAd.setFullScreenContentCallback(fullScreenContentCallback)
-                }
-            })
-
-        binding.btnClick.setOnClickListener{
-            onDisplayButtonClicked(it)
-        }
-
-
-        return binding.root
     }
 
 
