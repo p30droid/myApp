@@ -1,12 +1,12 @@
 package com.androidlearn.digiandroid
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.widget.ViewPager2
 import com.androidlearn.digiandroid.config.ConfigApp
@@ -15,11 +15,11 @@ import com.androidlearn.digiandroid.di.DaggerUserComponent
 import com.androidlearn.digiandroid.di.UserComponent
 import com.androidlearn.digiandroid.di.UserModule
 import com.androidlearn.digiandroid.ui.category.CategoryFragment
+import com.androidlearn.digiandroid.ui.help.HelpActivity
 import com.androidlearn.digiandroid.ui.home.HomeFragment
 import com.androidlearn.digiandroid.ui.login.LoginActivity
 import com.androidlearn.digiandroid.ui.main.TabsAdapter
 import com.androidlearn.digiandroid.ui.setting.SettingFragment
-import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.android.gms.tasks.Task
@@ -149,6 +149,20 @@ class MainActivity : AppCompatActivity() {
         })
 
 
+        val map: MutableMap<Int, String> = HashMap()
+
+        map[1] = "Reza"
+        map[2] = "Kasra"
+        map[3] = "Parsa"
+
+        val it: Iterator<*> = map.entries.iterator()
+        while (it.hasNext()) {
+            val pair = it.next() as Map.Entry<*, *>
+            println(pair.key.toString() + " = " + pair.value)
+            // it.remove(); // avoids a ConcurrentModificationException
+        }
+
+
     }
 
 
@@ -166,6 +180,12 @@ class MainActivity : AppCompatActivity() {
             R.id.item_login -> {
 
                 var intent = Intent(applicationContext , LoginActivity::class.java)
+                startActivity(intent)
+
+            }
+            R.id.item_help -> {
+
+                var intent = Intent(applicationContext , HelpActivity::class.java)
                 startActivity(intent)
 
             }

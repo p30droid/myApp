@@ -12,6 +12,7 @@
     </data>
 
     <androidx.cardview.widget.CardView
+        bind:clickItem="@{product}"
         android:layout_margin="@dimen/margin_8"
         app:cardElevation="@dimen/margin_8"
         android:layout_width="300dp"

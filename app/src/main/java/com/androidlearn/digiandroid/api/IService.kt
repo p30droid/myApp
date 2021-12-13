@@ -2,6 +2,7 @@ package com.androidlearn.digiandroid.api
 
 import com.androidlearn.digiandroid.models.BaseModel
 import com.androidlearn.digiandroid.models.Category
+import io.reactivex.rxjava3.core.Observable
 import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.http.Field
@@ -25,5 +26,9 @@ interface IService {
 
     @GET("getCategories.php")
     fun category(): Call<Category>
+
+
+    @GET("getCategories.php")
+    fun getCategory() : Observable<Category>
 
 }

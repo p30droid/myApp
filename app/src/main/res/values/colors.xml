@@ -8,4 +8,5 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="app_color">#ef394e</color>
+    <color name="sky_blue">#b9eef4</color>
 </resources>
