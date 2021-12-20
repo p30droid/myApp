@@ -10,6 +10,7 @@ import com.androidlearn.digiandroid.R
 import com.androidlearn.digiandroid.databinding.CatRowBinding
 import com.androidlearn.digiandroid.models.Categories
 import com.bumptech.glide.Glide
+import com.squareup.picasso.Picasso
 
 class CategoryAdapter(category : List<Categories>) : RecyclerView.Adapter<CategoryVh>() {
 
@@ -57,8 +58,9 @@ class CategoryAdapter(category : List<Categories>) : RecyclerView.Adapter<Catego
         @JvmStatic
         @BindingAdapter("categoryImage")
         fun showImage(image : AppCompatImageView , url : String) {
-            Glide.with(image.context).load(url).into(image)
+         //   Glide.with(image.context).load(url).into(image)
 
+            Picasso.get().load(url).into(image)
 
         }
     }

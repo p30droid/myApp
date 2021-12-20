@@ -14,6 +14,9 @@
         android:theme="@style/Theme.DigiAndroid"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".ui.categoryProducts.CategoryProductActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.help.HelpActivity"
             android:exported="false" />
         <activity

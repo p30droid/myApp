@@ -27,6 +27,9 @@ interface IService {
     @GET("getCategories.php")
     fun category(): Call<Category>
 
+    @POST("getProductCategory.php")
+    fun getProductCategory(@Field("id") id : Int): Call<BaseModel>
+
 
     @GET("getCategories.php")
     fun getCategory() : Observable<Category>

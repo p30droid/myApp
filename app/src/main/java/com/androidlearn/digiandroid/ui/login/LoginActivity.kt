@@ -34,11 +34,11 @@ class LoginActivity : AppCompatActivity(), ILoginView<String> {
     }
 
     override fun showProgressBar() {
-        binding.progressbar.visibility = View.VISIBLE
+        binding.progressBar.visibility = View.VISIBLE
     }
 
     override fun hideProgressBar() {
-        binding.progressbar.visibility = View.GONE
+        binding.progressBar.visibility = View.GONE
     }
 
     override fun onUsernameError() {

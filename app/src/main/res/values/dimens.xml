@@ -4,4 +4,5 @@
     <dimen name="font_titles">18sp</dimen>
     <dimen name="news_slider">210dp</dimen>
     <dimen name="margin_16">16dp</dimen>
+    <dimen name="cat_height">220dp</dimen>
 </resources>
