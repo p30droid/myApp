@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment
 import androidx.viewpager2.widget.ViewPager2
 import com.androidlearn.digiandroid.config.ConfigApp
 import com.androidlearn.digiandroid.databinding.ActivityMainBinding
+import com.androidlearn.digiandroid.db.MyDatabase
 import com.androidlearn.digiandroid.di.DaggerUserComponent
 import com.androidlearn.digiandroid.di.UserComponent
 import com.androidlearn.digiandroid.di.UserModule
@@ -20,6 +21,7 @@ import com.androidlearn.digiandroid.ui.home.HomeFragment
 import com.androidlearn.digiandroid.ui.login.LoginActivity
 import com.androidlearn.digiandroid.ui.main.TabsAdapter
 import com.androidlearn.digiandroid.ui.setting.SettingFragment
+import com.androidlearn.mylibrary.MyUtility
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.android.gms.tasks.Task
@@ -162,6 +164,16 @@ class MainActivity : AppCompatActivity() {
             // it.remove(); // avoids a ConcurrentModificationException
         }
 
+
+        val myDb : MyDatabase = MyDatabase(applicationContext)
+
+        val data = myDb.usersList
+        Log.e("","");
+
+     //   val myUtil = MyUtility(applicationContext)
+
+
+       MyUtility.isEmpty("")
 
     }
 

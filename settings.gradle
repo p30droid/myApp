@@ -8,3 +8,4 @@ dependencyResolutionManagement {
 }
 rootProject.name = "DigiAndroid"
 include ':app'
+include ':myLibrary'
